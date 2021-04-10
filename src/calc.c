@@ -4,7 +4,7 @@
 
 //int PRE_CDECL addition( int, int ) POST_CDECL;
 //int PRE_CDECL substraction( int, int ) POST_CDECL;
-//int addition( int, int ) __attribute__((cdecl));
+int addition(int, int) __attribute__((cdecl));
 
 
 int main(void){
@@ -27,7 +27,7 @@ int main(void){
         scanf("%d", &arr[i]);
     }
     
-    res = addition(n);
+    res = addition(2,2);
     /*for (int i=0; i<(n-1); i++){
         if (i==0){
             res = addition(arr[i], arr[i+1]);

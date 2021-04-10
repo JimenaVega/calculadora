@@ -1,15 +1,21 @@
-CC	:= gcc
+
 AS		:= nasm
 ASFLAGS := -f elf
+CFLAGS	:= -m32
+LDFLAGS := -m32
+CC		:= gcc
+CXX		:= g++
+CXXFLAGS := -m32
+TARGETS := addition
 
-calc: clean addition.o calc.o
-	$(CC) -m32 addition.o calc.o -o calc
-# addition.o:
-# 	nasm -f elf addition.asm
-# calc.o:
-# 	$(CC) calc.c -o calc.o
+.PHONY: clean
 
 %.o: %.asm
 	$(AS) $(ASFLAGS) $< 
-clean:
-	rm -f *.o addition calc
+
+all: $(TARGETS) 
+
+addition: calc.o
+
+clean :
+	rm -f *.o $(TARGETS)
