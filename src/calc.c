@@ -2,6 +2,7 @@
 #include <stdlib.h>
 
 int addition(int, int) __attribute__((cdecl));
+int substraction(int, int) __attribute__((cdecl));
 int bin_to_dec(int num);
 void print_binary(int n);
 
@@ -33,10 +34,20 @@ int main (void){
         
         for (int i=0; i<(n-1); i++){
             if (i==0){
-                res = addition(arr[i], arr[i+1]);
+                if (op == 1){
+                    res = addition(arr[i], arr[i+1]);
+                }
+                else if (op == 2){
+                    res = substraction(arr[i], arr[i+1]);
+                }
             }
             else{
-                res = addition(res, arr[i+1]);
+                if (op == 1){
+                    res = addition(res, arr[i+1]);
+                }
+                else if (op == 2){
+                    res = substraction(res, arr[i+1]);
+                }
             }
         }
 
