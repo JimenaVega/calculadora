@@ -1,78 +1,80 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
+//Assembly functions
 int addition(int, int) __attribute__((cdecl));
 int substraction(int, int) __attribute__((cdecl));
-
-
-void inputs();
+//C functions
 int bin_to_dec(int num);
-void print_binary(int n);
-int verify_input_range(int n);
 
 int base,n,op;
 
-int main (void){
+int main (int argc,char* argv[]){
     
-    char answer;
+    int i = 1;
+    int temp;
+    int initial_flag = 0;
+    char* temp_char;
+    int values[argc/2];
+    char operators[argc/2 - 1];
+    int values_counter = 0;
+    int operators_counter = 0;
+    int res = 0;
+
     printf("CALCULATOR\n");
 
-    while (1){
+    while(argv[i] != NULL){
 
-        int sum,res;
-        inputs();
+        if(argv[i][1] == 'd'){
+            temp_char = strtok(argv[i], "d");
+            values[values_counter] = atoi(argv[i]);
+            
+            values_counter++;
+        }
+        else if(argv[i][0] == '+' || argv[i][0] == '-'){
+            operators[operators_counter] = argv[i][0];
 
-        int arr[n];
+            operators_counter++;
+        }
+        else{
 
-        for (int i=0; i<n; i++){
-            printf("Enter the number ");
-            scanf("%d", &arr[i]);
-            if(base == 1){
-                arr[i] = bin_to_dec(arr[i]);
-            }
+            temp_char = strtok(argv[i], "b");
+            values[values_counter] = bin_to_dec(atoi(argv[i]));
+         
+            values_counter++;
         }
-        
-        for (int i=0; i<(n-1); i++){
-            if (i==0){
-                if (op == 1){
-                    res = addition(arr[i], arr[i+1]);
-                }
-                else if (op == 2){
-                    res = substraction(arr[i], arr[i+1]);
-                }
-            }
-            else{
-                if (op == 1){
-                    res = addition(res, arr[i+1]);
-                }
-                else if (op == 2){
-                    res = substraction(res, arr[i+1]);
-                }
-            }
-        }
-
-        /*if(base == 1){
-            print_binary(res);
-        }else{
-            printf("\nSum is %d\n", res);
-        }*/
-        printf("\nSum is %d\n", res);
-        
-        
-        printf("\nContinue with operations? [y/n]: ");
-        scanf("%s", &answer);
-        if(answer == 'n'){
-            break;
-        }
-        else if(answer != 'y'){
-            perror("Invalid input.");
-            exit(1);
-        }
+        i++;
     }
 
-   
-    return 0;
+    int i_op = 0;
 
+    for (int i=0; i<((argc/2)-1); i++){
+
+        if (i == 0){
+            if (operators[i_op] == '+'){
+                res = addition(values[i], values[i+1]);
+            }
+            else if (operators[i_op] == '-'){
+                res = substraction(values[i], values[i+1]);
+            }
+            i_op++;
+        }
+        else{
+            if (operators[i_op] == '+'){
+                res = addition(res, values[i+1]);
+                i_op++;
+            }
+            else if (operators[i_op] == '-'){
+                res = substraction(res, values[i+1]);
+                i_op++;
+            }
+        }
+    }
+    
+    printf("\nResult : %d",res);
+
+    return res;
 }
 
 int bin_to_dec(int num){
@@ -88,52 +90,6 @@ int bin_to_dec(int num){
         base = base * 2;
     }
 
-    //printf("The Binary number is = %d \n", binary_val);
-    //printf("Its decimal equivalent is = %d \n", decimal_val);
-
     return decimal_val;
-
 }
 
-void print_binary(int n){
-
-    printf("\nSum is: ");
-    while (n) {
-        if (n & 1)
-            printf("1");
-        else
-            printf("0");
-
-        n >>= 1;
-    }
-    printf("\n");
-}
-
-int verify_input_range(int num){
-    if (num < 0 || num > 2){
-        printf("\nInvalid input. Re-enter option.\n");
-        return 0;
-    }else{
-        return 1;
-    }
-}
-
-void inputs(){
-    do{
-        printf("Ingrese base de numeración:\n[1] binario [2] decimal\n");
-        scanf("%d", &base);
-    }
-    while(verify_input_range(base)==0);
-
-    do{
-        printf("Ingrese operacion:\n[1] suma [2] resta\n");
-        scanf("%d", &op);
-    }
-    while(verify_input_range(op)==0);
-    do{
-        printf("Cantidad de numeros a ingresar: ");
-        scanf("%d", &n);
-    }
-    while(n<0);
-
-}

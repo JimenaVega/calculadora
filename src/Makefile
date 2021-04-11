@@ -3,10 +3,10 @@ AS		:= nasm
 ASFLAGS := -f elf
 CFLAGS	:= -m32
 LDFLAGS := -m32
-CC		:= gcc
+CC		:= gcc -g
 CXX		:= g++
 CXXFLAGS := -m32
-TARGETS := addition
+TARGETS := calculator
 
 .PHONY: clean
 
@@ -15,7 +15,7 @@ TARGETS := addition
 
 all: $(TARGETS) 
 
-addition: calc.o
+calculator: calc.o
 
 clean :
-	rm -f *.o $(TARGETS)
+	rm -f *.o $(TARGETS) calculator
