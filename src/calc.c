@@ -30,7 +30,8 @@ int main (int argc,char* argv[]){
     printf("CALCULATOR\n");
 
     while(argv[i] != NULL){
-        printf("%s - %d\n", argv[i], argc);
+
+        //printf("%s - %d\n", argv[i], argc);
         if(argv[i][1] == 'd'){
             temp_char = strtok(argv[i], "d");
             values[values_counter] = atoi(argv[i]);
@@ -43,31 +44,21 @@ int main (int argc,char* argv[]){
             printf("[%d]\n", values[values_counter]);
             values_counter++;
         }
+        else if(argv[i][0] == '+' || argv[i][0] == '-'){
+            printf("HERE:%c\n",argv[i][0]);
+            operators[operators_counter] = argv[i][0];
+            operators_counter++;
+        }
         //printf("%s\n", temp_char);
         i++;
     }
-    
-    // for(int i = 0; i < argc/2; i++){
-    //     printf("%d-", values[i]);
-    // }
+    printf("\noperators:\n");
+    for (int i=0; i<(argc/2)-1; i++){
+        printf("[%c]",operators[i]);
+    }
 
-    // while (1){
+    //  while (1){
 
-    //     int sum,res;
-
-    //     inputs();
-
-    //     int arr[n];
-
-    //     for (int i=0; i<n; i++){
-    //         printf("Enter a number ");
-    //         scanf("%d", &arr[i]);
-
-    //         if(base == 1){
-    //             arr[i] = bin_to_dec(arr[i]);
-    //         }
-    //     }
-        
     //     for (int i=0; i<(n-1); i++){
     //         if (i == 0){
     //             if (op == 1){
