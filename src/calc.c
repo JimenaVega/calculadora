@@ -5,6 +5,7 @@
 //Assembly functions
 int addition(int, int) __attribute__((cdecl));
 int substraction(int, int) __attribute__((cdecl));
+
 //C functions
 int bin_to_dec(int num);
 
@@ -26,10 +27,16 @@ int main (int argc,char* argv[]){
 
     while(argv[i] != NULL){
 
-        if(argv[i][1] == 'd'){
+        if(argv[i][0] == 'd'){
             temp_char = strtok(argv[i], "d");
-            values[values_counter] = atoi(argv[i]);
+            values[values_counter] = atoi(temp_char);
             
+            values_counter++;
+        }
+        else if(argv[i][0] == 'b'){
+            temp_char = strtok(argv[i], "b");
+            values[values_counter] = bin_to_dec(atoi(temp_char));
+         
             values_counter++;
         }
         else if(argv[i][0] == '+' || argv[i][0] == '-'){
@@ -38,11 +45,8 @@ int main (int argc,char* argv[]){
             operators_counter++;
         }
         else{
-
-            temp_char = strtok(argv[i], "b");
-            values[values_counter] = bin_to_dec(atoi(argv[i]));
-         
-            values_counter++;
+            perror("Invalid arguments.\n");
+            exit(0);
         }
         i++;
     }
@@ -72,7 +76,7 @@ int main (int argc,char* argv[]){
         }
     }
     
-    printf("\nResult : %d",res);
+    printf("\nResult : %d\n",res);
 
     return res;
 }

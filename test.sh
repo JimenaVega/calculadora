@@ -11,5 +11,5 @@ assert_equals () {
   fi
 }
 
-response=$(./calc 2 + 2)
+response=$(./calculator 2 + 2)
 assert_equals "$response" 4
