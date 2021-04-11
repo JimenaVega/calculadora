@@ -21,7 +21,7 @@ response=$(./calculator b1010 + b11 )
 assert_equals "$response" 13
 
 response=$(./calculator b11 - b1111)
-assert_equals "$response" -13
+assert_equals "$response" -12
 
 response=$(./calculator d2 - b10 + d6 - d2)
 assert_equals "$response" 4
@@ -35,5 +35,5 @@ assert_equals "$response" 15
 response=$(./calculator b1010 - b1011)
 assert_equals "$response" -1
 
-response=$(./calculator d11 - d-1 + d+10)
+response=$(./calculator d11 - d-1 + d-10)
 assert_equals "$response" 2
