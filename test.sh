@@ -11,5 +11,29 @@ assert_equals () {
   fi
 }
 
-response=$(./calculator 2 + 2)
+response=$(./calculator d2 + d2)
 assert_equals "$response" 4
+
+response=$(./calculator d7 - d2)
+assert_equals "$response" 5
+
+response=$(./calculator b1010 + b11 )
+assert_equals "$response" 13
+
+response=$(./calculator b11 - b1111)
+assert_equals "$response" -13
+
+response=$(./calculator d2 - b10 + d6 - d2)
+assert_equals "$response" 4
+
+response=$(./calculator d5 + d-2)
+assert_equals "$response" 3
+
+response=$(./calculator b1010 - d-5)
+assert_equals "$response" 15
+
+response=$(./calculator b1010 - b1011)
+assert_equals "$response" -1
+
+response=$(./calculator d11 - d-1 + d+10)
+assert_equals "$response" 2
