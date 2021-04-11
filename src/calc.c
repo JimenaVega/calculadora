@@ -24,6 +24,7 @@ int main (int argc,char* argv[]){
     char operators[argc/2 - 1];
     int values_counter = 0;
     int operators_counter = 0;
+    int res = 0;
 
     printf("%d\n", argc);
 
@@ -49,53 +50,46 @@ int main (int argc,char* argv[]){
             operators[operators_counter] = argv[i][0];
             operators_counter++;
         }
-        //printf("%s\n", temp_char);
         i++;
     }
+
     printf("\noperators:\n");
     for (int i=0; i<(argc/2)-1; i++){
         printf("[%c]",operators[i]);
     }
 
-    //  while (1){
+    printf("\n--------------------\n\n");
+    int i_op = 0;
 
-    //     for (int i=0; i<(n-1); i++){
-    //         if (i == 0){
-    //             if (op == 1){
-    //                 res = addition(arr[i], arr[i+1]);
-    //             }
-    //             else if (op == 2){
-    //                 res = substraction(arr[i], arr[i+1]);
-    //             }
-    //         }
-    //         else{
-    //             if (op == 1){
-    //                 res = addition(res, arr[i+1]);
-    //             }
-    //             else if (op == 2){
-    //                 res = substraction(res, arr[i+1]);
-    //             }
-    //         }
-    //     }
+    for (int i=0; i<((argc/2)-1); i++){
+        printf("i=%d\n",i);
+        if (i == 0){
+            if (operators[i_op] == '+'){
+                res = addition(values[i], values[i+1]);
+                printf("todo bien inside i==0+\n");
+            }
+            else if (operators[i_op] == '-'){
+                res = substraction(values[i], values[i+1]);
+                printf("todo bien inside i==0-\n");
+            }
+            i_op++;
+        }
+        else{
+            if (operators[i_op] == '+'){
+                res = addition(res, values[i+1]);
+                i_op++;
+                printf("todo bien inside i!=0+\n");
+            }
+            else if (operators[i_op] == '-'){
+                res = substraction(res, values[i+1]);
+                i_op++;
+                printf("todo bien inside i!=0\n");
+            }
 
-    //     /*if(base == 1){
-    //         print_binary(res);
-    //     }else{
-    //         printf("\nSum is %d\n", res);
-    //     }*/
-    //     printf("\nSum is %d\n", res);
-        
-    //     printf("\nContinue with operations? [y/n]: ");
-    //     scanf("%s", &answer);
-
-    //     if (answer == 'n'){
-    //         break;
-    //     }
-    //     else if (answer != 'y'){
-    //         perror("Invalid input.");
-    //         exit(1);
-    //     }
-    // }
+        }
+    }
+    
+    printf("\nSum is : %d",res);
 
     return 0;
 }

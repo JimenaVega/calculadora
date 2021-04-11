@@ -3,7 +3,7 @@ AS		:= nasm
 ASFLAGS := -f elf
 CFLAGS	:= -m32
 LDFLAGS := -m32
-CC		:= gcc
+CC		:= gcc -g
 CXX		:= g++
 CXXFLAGS := -m32
 TARGETS := calculator
@@ -18,4 +18,4 @@ all: $(TARGETS)
 calculator: calc.o
 
 clean :
-	rm -f *.o $(TARGETS)
+	rm -f *.o $(TARGETS) calculator
