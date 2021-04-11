@@ -3,29 +3,29 @@
 
 int addition(int, int) __attribute__((cdecl));
 int substraction(int, int) __attribute__((cdecl));
+
+
+void inputs();
 int bin_to_dec(int num);
 void print_binary(int n);
+int verify_input_range(int n);
+
+int base,n,op;
 
 int main (void){
-    int base,n,sum,op,res;
+    
     char answer;
-    printf("CALCULADORA\n");
+    printf("CALCULATOR\n");
 
     while (1){
 
-        printf("Ingrese base de numeración:\n[1] binario [2] decimal\n");
-        scanf("%d", &base);
-
-        printf("Ingrese operacion:\n[1] suma [2] resta\n");
-        scanf("%d", &op);
-
-        printf("Cantidad de numeros a ingresar: ");
-        scanf("%d", &n);
+        int sum,res;
+        inputs();
 
         int arr[n];
 
         for (int i=0; i<n; i++){
-            printf("Ingrese el numero: ");
+            printf("Enter the number ");
             scanf("%d", &arr[i]);
             if(base == 1){
                 arr[i] = bin_to_dec(arr[i]);
@@ -51,9 +51,15 @@ int main (void){
             }
         }
 
-        printf("Sum is %d\n", res);
+        /*if(base == 1){
+            print_binary(res);
+        }else{
+            printf("\nSum is %d\n", res);
+        }*/
+        printf("\nSum is %d\n", res);
         
-        printf("Continue with operations? [y/n]: ");
+        
+        printf("\nContinue with operations? [y/n]: ");
         scanf("%s", &answer);
         if(answer == 'n'){
             break;
@@ -82,8 +88,8 @@ int bin_to_dec(int num){
         base = base * 2;
     }
 
-    printf("The Binary number is = %d \n", binary_val);
-    printf("Its decimal equivalent is = %d \n", decimal_val);
+    //printf("The Binary number is = %d \n", binary_val);
+    //printf("Its decimal equivalent is = %d \n", decimal_val);
 
     return decimal_val;
 
@@ -91,6 +97,7 @@ int bin_to_dec(int num){
 
 void print_binary(int n){
 
+    printf("\nSum is: ");
     while (n) {
         if (n & 1)
             printf("1");
@@ -100,4 +107,33 @@ void print_binary(int n){
         n >>= 1;
     }
     printf("\n");
+}
+
+int verify_input_range(int num){
+    if (num < 0 || num > 2){
+        printf("\nInvalid input. Re-enter option.\n");
+        return 0;
+    }else{
+        return 1;
+    }
+}
+
+void inputs(){
+    do{
+        printf("Ingrese base de numeración:\n[1] binario [2] decimal\n");
+        scanf("%d", &base);
+    }
+    while(verify_input_range(base)==0);
+
+    do{
+        printf("Ingrese operacion:\n[1] suma [2] resta\n");
+        scanf("%d", &op);
+    }
+    while(verify_input_range(op)==0);
+    do{
+        printf("Cantidad de numeros a ingresar: ");
+        scanf("%d", &n);
+    }
+    while(n<0);
+
 }
