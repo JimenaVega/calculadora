@@ -31,19 +31,19 @@ int main (int argc,char* argv[]){
 
     while(argv[i] != NULL){
         printf("%s - %d\n", argv[i], argc);
-        if(argv[i][0] == 'd'){
+        if(argv[i][1] == 'd'){
             temp_char = strtok(argv[i], "d");
             values[values_counter] = atoi(argv[i]);
-            printf("%d\n", values[values_counter]);
+            printf("[%d]\n", values[values_counter]);
             values_counter++;
         }
-        else if(argv[i][0] == 'b'){
+        else if(argv[i][1] == 'b'){
             temp_char = strtok(argv[i], "b");
             values[values_counter] = bin_to_dec(atoi(argv[i]));
-            printf("%d\n", values[values_counter]);
+            printf("[%d]\n", values[values_counter]);
             values_counter++;
         }
-        printf("%s\n", temp_char);
+        //printf("%s\n", temp_char);
         i++;
     }
     
