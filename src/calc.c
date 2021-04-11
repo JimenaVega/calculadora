@@ -16,7 +16,7 @@ int base,n,op;
 int main (int argc,char* argv[]){
     
     // char answer;
-    int i = 0;
+    int i = 1;
     int temp;
     int initial_flag = 0;
     char* temp_char;
@@ -30,6 +30,7 @@ int main (int argc,char* argv[]){
 
     printf("CALCULATOR\n");
 
+
     while(argv[i] != NULL){
 
         //printf("%s - %d\n", argv[i], argc);
@@ -39,20 +40,27 @@ int main (int argc,char* argv[]){
             printf("[%d]\n", values[values_counter]);
             values_counter++;
         }
-        else if(argv[i][1] == 'b'){
-            temp_char = strtok(argv[i], "b");
-            values[values_counter] = bin_to_dec(atoi(argv[i]));
-            printf("[%d]\n", values[values_counter]);
-            values_counter++;
-        }
         else if(argv[i][0] == '+' || argv[i][0] == '-'){
             printf("HERE:%c\n",argv[i][0]);
             operators[operators_counter] = argv[i][0];
             operators_counter++;
         }
+        else{
+
+            printf("bin: %s\n", argv[i]);
+            temp_char = strtok(argv[i], "b");
+            printf("temp_char = %s\n", temp_char);
+            values[values_counter] = bin_to_dec(atoi(argv[i]));
+            printf("[%d]\n", values[values_counter]);
+            values_counter++;
+        }
         i++;
     }
-
+    printf("\n--------------------\n\n");
+     printf("values\n");
+    for(int i = 0; i < argc/2; i++){
+        printf("%d-", values[i]);
+    }
     printf("\noperators:\n");
     for (int i=0; i<(argc/2)-1; i++){
         printf("[%c]",operators[i]);
@@ -89,9 +97,9 @@ int main (int argc,char* argv[]){
         }
     }
     
-    printf("\nSum is : %d",res);
+    printf("\nResult : %d",res);
 
-    return 0;
+    return res;
 }
 
 int bin_to_dec(int num){
