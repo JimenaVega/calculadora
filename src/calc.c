@@ -23,7 +23,7 @@ int main (int argc,char* argv[]){
     int operators_counter = 0;
     int res = 0;
 
-    printf("CALCULATOR\n");
+    // printf("CALCULATOR\n");
 
     while(argv[i] != NULL){
 
@@ -76,7 +76,8 @@ int main (int argc,char* argv[]){
         }
     }
     
-    printf("\nResult : %d\n",res);
+    // printf("\nResult : %d\n",res);
+    printf("%d\n", res);
 
     return res;
 }
