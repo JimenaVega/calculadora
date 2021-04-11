@@ -1,21 +1,21 @@
 
-AS		:= nasm
-ASFLAGS := -f elf
-CFLAGS	:= -m32
-LDFLAGS := -m32
-CC		:= gcc -g
-CXX		:= g++
-CXXFLAGS := -m32
-TARGETS := calculator
+AS:=nasm
+ASFLAGS:=-f elf
+CFLAGS:=-m32
+LDFLAGS:=-m32
+CC:=gcc
+CXX:=g++
+CXXFLAGS:=-m32
+TARGETS:=calculator
 
-.PHONY: clean
+.PHONY:clean
 
-%.o: %.asm
+%.o:%.asm
 	$(AS) $(ASFLAGS) $< 
 
-all: $(TARGETS) 
+all:clean $(TARGETS)
 
-calculator: calc.o
+calculator:calc.o
 
 clean :
-	rm -f *.o $(TARGETS) calculator
+	rm -f *.o $(TARGETS)
